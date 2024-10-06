@@ -1,0 +1,26 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    container_name: abcall-api-local
+    restart: always
+    volumes:
+      - ".:/app"
+    ports:
+      - "5002:3001"
+    env_file:
+      - .env.local
+    tty: true
+    networks:
+      - api_net
+      - app_net
+
+
+networks:
+  api_net:
+    name: api_net
+    driver: bridge
+  app_net:
+    name: app_net
+    driver: bridge
